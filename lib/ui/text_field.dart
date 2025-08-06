@@ -2,6 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
+import '../core/fields_mixin.dart';
+import '../core/validator.dart';
+
 class TextFieldTest extends StatefulWidget {
   const TextFieldTest({super.key});
 
@@ -9,10 +12,7 @@ class TextFieldTest extends StatefulWidget {
   State<TextFieldTest> createState() => _TextFieldTestState();
 }
 
-class _TextFieldTestState extends State<TextFieldTest> {
-  final TextEditingController phoneC = TextEditingController();
-  final TextEditingController passwordC = TextEditingController();
-
+class _TextFieldTestState extends State<TextFieldTest> with FieldsMixin {
   final formkey = GlobalKey<FormState>();
 
   @override
@@ -25,6 +25,16 @@ class _TextFieldTestState extends State<TextFieldTest> {
           padding: const EdgeInsets.all(24.0),
           child: Column(
             children: [
+              SizedBox(height: 20),
+              TextFormField(
+                controller: emailC,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  hintText: 'Enter your email',
+                ),
+                validator: Validator.validateEmail,
+              ),
+
               SizedBox(height: 20),
               TextFormField(
                 controller: phoneC,
@@ -55,20 +65,7 @@ class _TextFieldTestState extends State<TextFieldTest> {
                   filled: true,
                   fillColor: Colors.white,
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Phone Number is required';
-                  }
-                  //regex for only numbers
-                  if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-                    return 'Phone Number must be numbers';
-                  }
-                  if (value.length != 10 || !value.startsWith('05')) {
-                    return 'Phone Number must be 10 digits and starts with 05';
-                  }
-
-                  return null;
-                },
+                validator: Validator.validatePhoneNumber,
               ),
               SizedBox(height: 20),
               TextFormField(
@@ -99,19 +96,27 @@ class _TextFieldTestState extends State<TextFieldTest> {
                   filled: true,
                   fillColor: Colors.white,
                 ),
+                validator: Validator.validatePassword,
+              ),
+              SizedBox(height: 20),
+              TextFormField(
+                controller: confirmPasswordC,
+                decoration: InputDecoration(
+                  labelText: 'Confirm Password',
+                  hintText: 'Enter your confirm password',
+                ),
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Password is required';
-                  }
-
-                  return null;
+                  //readable code
+                  return Validator.validateConfirmPassword(
+                    value: value,
+                    password: passwordC.text,
+                  );
                 },
               ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (!formkey.currentState!.validate()) return;
-
                   log('Congratulations , you are logged in');
                 },
                 child: Text('Submit'),

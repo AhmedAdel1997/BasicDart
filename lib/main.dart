@@ -1,9 +1,9 @@
+import 'package:dratbasics/ui/column_test.dart';
 import 'package:flutter/material.dart';
 
-import 'ui/text_field.dart';
+import 'core/text_styles.dart';
 
 void main() {
-  //entry point of the dart code
   runApp(const MyApp()); //run the application
 }
 
@@ -16,10 +16,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+
       theme: ThemeData(
+        fontFamily: fontFamily,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const TextFieldTest(),
+      home: const ColumnTest(),
     );
   }
 }
