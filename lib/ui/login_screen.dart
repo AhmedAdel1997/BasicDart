@@ -1,18 +1,17 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 import '../core/fields_mixin.dart';
 import '../core/validator.dart';
+import 'home_screen.dart';
 
-class TextFieldTest extends StatefulWidget {
-  const TextFieldTest({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<TextFieldTest> createState() => _TextFieldTestState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _TextFieldTestState extends State<TextFieldTest> with FieldsMixin {
+class _LoginScreenState extends State<LoginScreen> with FieldsMixin {
   final formkey = GlobalKey<FormState>();
 
   @override
@@ -116,8 +115,21 @@ class _TextFieldTestState extends State<TextFieldTest> with FieldsMixin {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  if (!formkey.currentState!.validate()) return;
-                  log('Congratulations , you are logged in');
+                  // if (!formkey.currentState!.validate()) return;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (context) => HomeScreen(
+                            // user: UserModel(
+                            //   name: "Mohamed",
+                            //   email: "Mohammed@gmail.com",
+                            //   age: 28,
+                            //   phone: "01023456789",
+                            // ),
+                          ),
+                    ),
+                  );
                 },
                 child: Text('Submit'),
               ),

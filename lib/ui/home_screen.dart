@@ -1,0 +1,102 @@
+// import 'dart:developer';
+
+// import 'package:dratbasics/core/constructor_test.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+// //stateful lifecycle
+
+// //-createState() --->1
+// //-initState() ---> 2 //before build
+// //-dispose()
+// //-build() ----> 3
+
+// class HomeScreen extends StatefulWidget {
+//   final UserModel user;
+//   const HomeScreen({super.key, required this.user});
+
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+
+// class _HomeScreenState extends State<HomeScreen> {
+//   @override
+//   void initState() {
+//     super.initState();
+//     log('initState');
+//   }
+
+//   @override
+//   void dispose() {
+//     log('dispose');
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     log('build');
+//     return Scaffold(
+//       body: SizedBox(
+//         width: double.infinity,
+//         height: double.infinity,
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: [
+//             TextButton(
+//               onPressed: () {
+//                 // Navigator.push(
+//                 //   context,
+//                 //   MaterialPageRoute(builder: (context) => MainScreen()),
+//                 // );
+//               },
+//               child: Text(
+//                 'Hello, ${widget.user.name} ${widget.user.email}\n ${widget.user.age}\n ${widget.user.phone}',
+//                 style: TextStyle(color: Colors.black, fontSize: 30.sp),
+//               ),
+//             ),
+//             SizedBox(height: 20.h),
+
+//             TextButton(
+//               onPressed: () {
+//                 setState(() {
+//                   // call build function
+//                   widget.user.name = 'Ahmed adel';
+//                 });
+//               },
+//               child: Text(
+//                 'Change user name',
+//                 style: TextStyle(fontSize: 20.sp),
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+            child: Text(
+              'Home',
+              style: TextStyle(fontSize: 20.sp, color: Colors.black),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
