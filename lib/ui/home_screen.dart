@@ -76,23 +76,52 @@
 //   }
 // }
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../cubit/counter_cubit/counter_cubit.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+// product based
+//software house
+class _HomeScreenState extends State<HomeScreen> {
+  // int counter = 0;
+  @override
   Widget build(BuildContext context) {
+    log('build');
+    // final counterCubit = BlocProvider.of<CounterCubit>(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // BlocProvider.of<CounterCubit>(context).increment();
+          context.read<CounterCubit>().increment();
+        },
+
+        backgroundColor: Colors.indigo,
+        child: Icon(Icons.add, color: Colors.white),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Text(
-              'Home',
-              style: TextStyle(fontSize: 20.sp, color: Colors.black),
+            child: BlocBuilder<CounterCubit, int>(
+              builder: (context, state) {
+                log('builder');
+                return Text(
+                  'Home $state',
+                  style: TextStyle(fontSize: 20.sp, color: Colors.black),
+                );
+              },
             ),
           ),
         ],

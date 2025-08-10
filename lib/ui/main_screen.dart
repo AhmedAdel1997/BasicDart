@@ -37,13 +37,13 @@ class _MainScreenState extends State<MainScreen> {
       child: Scaffold(
         backgroundColor: Colors.black,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            //action
-          },
-          backgroundColor: Colors.indigo,
-          child: Icon(Icons.add, color: Colors.white),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     //action
+        //   },
+        //   backgroundColor: Colors.indigo,
+        //   child: Icon(Icons.add, color: Colors.white),
+        // ),
 
         // floatingActionButton: Container(
         //   height: 60.h,
