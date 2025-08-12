@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/text_styles.dart';
+import 'cubit/bottom_bar/bottom_bar_cubit.dart';
 import 'cubit/counter_cubit/counter_cubit.dart';
 import 'ui/main_screen.dart';
 
@@ -13,14 +14,6 @@ import 'ui/main_screen.dart';
 void main() async {
   //main function
   runApp(const MyApp()); //run the application
-
-  //Futures
-
-  //Streams
-  // listen to the stream
-  // Real-time data
-  // single stream
-  // broadcast streams
 }
 
 class MyApp extends StatelessWidget {
@@ -34,8 +27,11 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return BlocProvider(
-          create: (context) => CounterCubit(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => CounterCubit()),
+            BlocProvider(create: (context) => BottomBarCubit()),
+          ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../cubit/bottom_bar/bottom_bar_cubit.dart';
 import '../cubit/counter_cubit/counter_cubit.dart';
 
 class NotificationsScreen extends StatefulWidget {
@@ -16,7 +17,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.read<BottomBarCubit>().changeIndex(0);
+        },
         child: Icon(Icons.add),
       ),
       body: Column(

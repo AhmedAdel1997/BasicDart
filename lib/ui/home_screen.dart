@@ -91,9 +91,13 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-// product based
-//software house
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<CounterCubit>().getCounter();
+  }
+
   // int counter = 0;
   @override
   Widget build(BuildContext context) {
@@ -103,11 +107,13 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // BlocProvider.of<CounterCubit>(context).increment();
-          context.read<CounterCubit>().increment();
+          // context.read<CounterCubit>().increment();
+          context.read<CounterCubit>().deleteCounter();
+          // context.read<CounterCubit>().saveCounter();
         },
 
         backgroundColor: Colors.indigo,
-        child: Icon(Icons.add, color: Colors.white),
+        child: Icon(Icons.delete, color: Colors.white),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
