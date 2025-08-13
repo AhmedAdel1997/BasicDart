@@ -76,23 +76,58 @@
 //   }
 // }
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../cubit/counter_cubit/counter_cubit.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<CounterCubit>().getCounter();
+  }
+
+  // int counter = 0;
+  @override
   Widget build(BuildContext context) {
+    log('build');
+    // final counterCubit = BlocProvider.of<CounterCubit>(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // BlocProvider.of<CounterCubit>(context).increment();
+          // context.read<CounterCubit>().increment();
+          context.read<CounterCubit>().deleteCounter();
+          // context.read<CounterCubit>().saveCounter();
+        },
+
+        backgroundColor: Colors.indigo,
+        child: Icon(Icons.delete, color: Colors.white),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Text(
-              'Home',
-              style: TextStyle(fontSize: 20.sp, color: Colors.black),
+            child: BlocBuilder<CounterCubit, int>(
+              builder: (context, state) {
+                log('builder');
+                return Text(
+                  'Home $state',
+                  style: TextStyle(fontSize: 20.sp, color: Colors.black),
+                );
+              },
             ),
           ),
         ],
