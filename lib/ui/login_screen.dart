@@ -1,8 +1,11 @@
+import 'package:dratbasics/cubit/login/login_cubit.dart';
+import 'package:dratbasics/ui/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../core/fields_mixin.dart';
 import '../core/validator.dart';
-import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -26,20 +29,12 @@ class _LoginScreenState extends State<LoginScreen> with FieldsMixin {
             children: [
               SizedBox(height: 20),
               TextFormField(
-                controller: emailC,
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  hintText: 'Enter your email',
-                ),
-                validator: Validator.validateEmail,
-              ),
-
-              SizedBox(height: 20),
-              TextFormField(
                 controller: phoneC,
                 keyboardType: TextInputType.phone,
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   labelText: 'Phone Number',
+                  labelStyle: TextStyle(color: Colors.blue),
                   hintText: 'Enter your phone number',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(40),
@@ -69,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> with FieldsMixin {
               SizedBox(height: 20),
               TextFormField(
                 controller: passwordC,
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   labelText: 'Password',
                   hintText: 'Enter your password',
@@ -97,41 +93,43 @@ class _LoginScreenState extends State<LoginScreen> with FieldsMixin {
                 ),
                 validator: Validator.validatePassword,
               ),
+
               SizedBox(height: 20),
-              TextFormField(
-                controller: confirmPasswordC,
-                decoration: InputDecoration(
-                  labelText: 'Confirm Password',
-                  hintText: 'Enter your confirm password',
+              BlocListener<LoginCubit, LoginState>(
+                listener: (context, state) {
+                  if (state is LoginSuccess) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainScreen()),
+                    );
+                  }
+                  if (state is LoginError) {
+                    Fluttertoast.showToast(
+                      msg: state.errorMessage,
+                      backgroundColor: Colors.red,
+                    );
+                  }
+                },
+                child: BlocBuilder<LoginCubit, LoginState>(
+                  builder: (context, state) {
+                    if (state is LoginLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      );
+                    }
+                    return ElevatedButton(
+                      onPressed: () {
+                        if (!formkey.currentState!.validate()) return;
+
+                        context.read<LoginCubit>().login(
+                          phone: phoneC.text,
+                          password: passwordC.text,
+                        );
+                      },
+                      child: Text('Submit'),
+                    );
+                  },
                 ),
-                validator: (value) {
-                  //readable code
-                  return Validator.validateConfirmPassword(
-                    value: value,
-                    password: passwordC.text,
-                  );
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  // if (!formkey.currentState!.validate()) return;
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder:
-                          (context) => HomeScreen(
-                            // user: UserModel(
-                            //   name: "Mohamed",
-                            //   email: "Mohammed@gmail.com",
-                            //   age: 28,
-                            //   phone: "01023456789",
-                            // ),
-                          ),
-                    ),
-                  );
-                },
-                child: Text('Submit'),
               ),
             ],
           ),
