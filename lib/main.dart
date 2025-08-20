@@ -5,8 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/text_styles.dart';
 import 'cubit/bottom_bar/bottom_bar_cubit.dart';
 import 'cubit/counter_cubit/counter_cubit.dart';
-import 'cubit/cubit/get_ads_cubit.dart';
-import 'ui/main_screen.dart';
+import 'cubit/get_ads/get_ads_cubit.dart';
+import 'cubit/get_orders/get_orders_cubit.dart';
+import 'cubit/login/login_cubit.dart';
+import 'ui/login_screen.dart';
 
 //state management -- flutter_bloc
 //caching -- shared_preferences
@@ -33,6 +35,8 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => CounterCubit()),
             BlocProvider(create: (context) => BottomBarCubit()),
             BlocProvider(create: (context) => GetAdsCubit()),
+            BlocProvider(create: (context) => LoginCubit()),
+            BlocProvider(create: (context) => GetOrdersCubit()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -47,7 +51,7 @@ class MyApp extends StatelessWidget {
           ),
         );
       },
-      child: const MainScreen(),
+      child: const LoginScreen(),
     );
   }
 }

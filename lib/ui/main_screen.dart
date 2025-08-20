@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../cubit/cubit/get_ads_cubit.dart';
+import '../cubit/get_ads/get_ads_cubit.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
