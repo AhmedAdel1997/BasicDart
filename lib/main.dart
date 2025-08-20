@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/text_styles.dart';
 import 'cubit/bottom_bar/bottom_bar_cubit.dart';
 import 'cubit/counter_cubit/counter_cubit.dart';
+import 'cubit/cubit/get_ads_cubit.dart';
 import 'ui/main_screen.dart';
 
 //state management -- flutter_bloc
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => CounterCubit()),
             BlocProvider(create: (context) => BottomBarCubit()),
+            BlocProvider(create: (context) => GetAdsCubit()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
