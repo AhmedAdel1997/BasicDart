@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.read<GetOrdersCubit>().getOrders();
+          context.read<GetOrdersCubit>().getOrders(status: 'approved');
         },
 
         backgroundColor: Colors.indigo,
