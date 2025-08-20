@@ -20,12 +20,13 @@ class _LoginScreenState extends State<LoginScreen> with FieldsMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('TextField Test')),
+      appBar: AppBar(title: Text('Login Screen')),
       body: Form(
         key: formkey,
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 20),
               TextFormField(

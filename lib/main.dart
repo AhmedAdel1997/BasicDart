@@ -7,8 +7,10 @@ import 'cubit/bottom_bar/bottom_bar_cubit.dart';
 import 'cubit/counter_cubit/counter_cubit.dart';
 import 'cubit/get_ads/get_ads_cubit.dart';
 import 'cubit/get_orders/get_orders_cubit.dart';
+import 'cubit/get_services/get_services_cubit.dart';
 import 'cubit/login/login_cubit.dart';
-import 'ui/login_screen.dart';
+import 'cubit/splash/splash_cubit.dart';
+import 'ui/splash_screen.dart';
 
 //state management -- flutter_bloc
 //caching -- shared_preferences
@@ -34,9 +36,11 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider(create: (context) => CounterCubit()),
             BlocProvider(create: (context) => BottomBarCubit()),
-            BlocProvider(create: (context) => GetAdsCubit()),
+            BlocProvider(create: (context) => GetServicesCubit()),
             BlocProvider(create: (context) => LoginCubit()),
             BlocProvider(create: (context) => GetOrdersCubit()),
+            BlocProvider(create: (context) => GetAdsCubit()),
+            BlocProvider(create: (context) => SplashCubit()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -51,7 +55,7 @@ class MyApp extends StatelessWidget {
           ),
         );
       },
-      child: const LoginScreen(),
+      child: const SplashScreen(),
     );
   }
 }

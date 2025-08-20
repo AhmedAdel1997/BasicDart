@@ -7,9 +7,9 @@ final class GetAdsInitial extends GetAdsState {}
 final class GetAdsLoading extends GetAdsState {}
 
 final class GetAdsSuccess extends GetAdsState {
-  final List<ServiceModel> services;
+  final List<AdModel> ads;
 
-  GetAdsSuccess({required this.services});
+  GetAdsSuccess({required this.ads});
 }
 
 final class GetAdsError extends GetAdsState {

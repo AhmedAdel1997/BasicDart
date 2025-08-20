@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../cubit/get_ads/get_ads_cubit.dart';
+import '../cubit/get_services/get_services_cubit.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<GetAdsCubit>().getAds();
+    context.read<GetServicesCubit>().getServices();
   }
 
   @override
